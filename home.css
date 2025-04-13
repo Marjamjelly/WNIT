@@ -1,15 +1,16 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Courier New", Courier, monospace;
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9;
-    color: #333;
+    background-color: #121212;
+    color: #e0e0e0;
     text-align: center;
 }
 
 h1 {
     font-size: 2.5rem;
     margin-top: 20px;
+    color: #ffffff;
 }
 
 p {
@@ -17,17 +18,21 @@ p {
     margin: 20px auto;
     width: 80%;
     line-height: 1.6;
+    color: #bbbbbb;
 }
 
 h2 {
     font-size: 2rem;
     margin-top: 30px;
-    color: #555;
+    color: #dddddd;
 }
 
 ul {
-    list-style: none;
-    padding: 0;
+    list-style-type: disc; /* Adds bullets to the list */
+    text-align: left; /* Left-justify the list */
+    margin: 20px auto;
+    padding: 0 20px;
+    max-width: 400px;
 }
 
 ul li {
@@ -37,10 +42,10 @@ ul li {
 ul li a {
     text-decoration: none;
     font-size: 1.2rem;
-    color: #007BFF;
+    color: #76c7ff;
     transition: color 0.3s;
 }
 
 ul li a:hover {
-    color: #0056b3;
+    color: #4caf50;
 }
