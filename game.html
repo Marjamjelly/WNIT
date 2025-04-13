@@ -4,21 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Celebrity Noses</title>
-    <link rel="stylesheet" href="pack.css">
+    <link rel="stylesheet" href="css/pack.css">
     <script>
-        // Array for the Celebrity pack
         const noses = [
             {
-                answers: ["John Doe", "Doe", "John"],
+                answers: ["John Doe", "John", "Doe"],
                 noseImage: "images/noses/john_doe_nose.jpeg",
                 fullImage: "images/full/john_doe.jpeg"
             },
             {
                 answers: ["Jane Doe", "Doe", "Jane"],
-                noseImage: "images/noses/jane_doe_nose.jpeg",
-                fullImage: "images/full/jane_doe.jpeg"
+                noseImage: "images/noses/jane_doe_nose.jpg",
+                fullImage: "images/full/jane_doe.jpg"
             }
-            // Add more items as needed
         ];
 
         let score = 0;
@@ -27,13 +25,14 @@
 
         function pickRandomNose() {
             if (remainingNoses.length === 0) {
-                alert(`Game Over! Your score: ${score}`);
-                window.location.href = "index.html";
+                document.getElementById("message").innerText = `Game Over! Your final score: ${score}`;
                 return;
             }
             const randomIndex = Math.floor(Math.random() * remainingNoses.length);
             currentNose = remainingNoses.splice(randomIndex, 1)[0];
             document.getElementById("nose-image").src = currentNose.noseImage;
+            document.getElementById("full-image").style.visibility = "hidden";
+            document.getElementById("message").innerText = ""; // Clear previous message
         }
 
         function handleGuess() {
@@ -41,18 +40,15 @@
             const correctAnswers = currentNose.answers.map(answer => answer.toLowerCase().replace(/\s+/g, ""));
             if (correctAnswers.includes(guess)) {
                 score++;
-                alert(`Correct! It was ${currentNose.answers[0]}.`);
+                document.getElementById("message").innerText = `Correct! It was ${currentNose.answers[0]}.`;
                 document.getElementById("full-image").src = currentNose.fullImage;
+                document.getElementById("full-image").style.visibility = "visible";
                 document.getElementById("score").innerText = `Score: ${score}`;
-                setTimeout(() => {
-                    document.getElementById("full-image").src = "";
-                    pickRandomNose();
-                }, 3000);
             } else {
-                alert(`Wrong! It was ${currentNose.answers[0]}.`);
-                pickRandomNose();
+                document.getElementById("message").innerText = `Wrong! It was ${currentNose.answers[0]}.`;
             }
-            document.getElementById("guess-input").value = "";
+            document.getElementById("guess-input").value = ""; // Clear input
+            setTimeout(pickRandomNose, 3000); // Wait 3 seconds before showing the next nose
         }
 
         window.onload = function () {
@@ -64,11 +60,14 @@
 <body>
     <h1>Celebrity Noses</h1>
     <h2 id="score">Score: 0</h2>
-    <img id="nose-image" src="" alt="Nose Image">
+    <div id="game-container">
+        <img id="nose-image" src="" alt="Nose Image">
+        <img id="full-image" src="" alt="Full Image Placeholder">
+    </div>
     <div>
         <input id="guess-input" type="text" placeholder="Enter your guess">
         <button onclick="handleGuess()">Submit</button>
     </div>
-    <img id="full-image" src="" alt="Full Image" style="display: block; margin-top: 20px;">
+    <p id="message"></p>
 </body>
 </html>
